@@ -206,6 +206,35 @@ function DriverInfoPage() {
         </div>
       </div>
 
+      {!notesLoading && !filesLoading && notes.length === 0 && files.length === 0 && (
+        <Card>
+          <CardContent className="p-6 text-center space-y-4">
+            <p className="text-sm text-muted-foreground">No information added yet.</p>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                variant="outline"
+                className="h-11"
+                onClick={() => {
+                  noteInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+                  noteInputRef.current?.focus();
+                }}
+              >
+                <Plus className="mr-1 h-4 w-4" />Add Note
+              </Button>
+              <Button
+                variant="outline"
+                className="h-11"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Upload className="mr-1 h-4 w-4" />Upload Document
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+
+
       {/* Notes */}
       <Card>
         <CardContent className="p-4 space-y-3">
