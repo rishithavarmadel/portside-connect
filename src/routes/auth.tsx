@@ -59,7 +59,7 @@ function AuthPage() {
           <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-primary text-primary-foreground">
             <Truck className="h-7 w-7" />
           </div>
-          <CardTitle className="text-2xl">Gangavaram Transport</CardTitle>
+          <CardTitle className="text-2xl">Hanuman Transport</CardTitle>
           <CardDescription>
             {mode === "signin" ? "Admin sign in" : "Create admin account"}
           </CardDescription>
