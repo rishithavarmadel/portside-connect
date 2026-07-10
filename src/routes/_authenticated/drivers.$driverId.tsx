@@ -130,6 +130,8 @@ function DriverInfoPage() {
   const invalidateFiles = () => qc.invalidateQueries({ queryKey: ["driver-files", driverId] });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const noteInputRef = useRef<HTMLTextAreaElement>(null);
+
   const [uploading, setUploading] = useState(false);
 
   const handleUpload = async (fileList: FileList | null) => {
