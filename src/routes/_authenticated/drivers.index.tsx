@@ -24,7 +24,7 @@ import type { Tables } from "@/integrations/supabase/types";
 
 type Driver = Tables<"drivers">;
 
-export const Route = createFileRoute("/_authenticated/drivers")({
+export const Route = createFileRoute("/_authenticated/drivers/")({
   component: DriversPage,
 });
 
