@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gangavaram Transport Admin" },
+      { title: "Hanuman Transport Admin" },
       {
         name: "description",
         content:
           "Manage drivers, attendance, trips and daily advances for a family-owned transport business at Gangavaram Port.",
       },
-      { property: "og:title", content: "Gangavaram Transport Admin" },
+      { property: "og:title", content: "Hanuman Transport Admin" },
       {
         property: "og:description",
         content: "Drivers, attendance, trips and advances — all in one place.",
