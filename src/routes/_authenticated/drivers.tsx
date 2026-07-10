@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
@@ -201,9 +201,15 @@ function DriversPage() {
                     {d.notes && <p className="mt-2 text-xs text-muted-foreground line-clamp-2">{d.notes}</p>}
                   </div>
                   <div className="flex shrink-0 gap-1">
+                    <Button asChild size="icon" variant="ghost" title="Driver information">
+                      <Link to="/drivers/$driverId" params={{ driverId: d.id }}>
+                        <Info className="h-4 w-4" />
+                      </Link>
+                    </Button>
                     <Button size="icon" variant="ghost" onClick={() => setEditing(d)}>
                       <Pencil className="h-4 w-4" />
                     </Button>
+
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button size="icon" variant="ghost" className="text-destructive">
