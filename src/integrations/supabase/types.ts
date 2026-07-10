@@ -87,6 +87,38 @@ export type Database = {
           },
         ]
       }
+      driver_notes: {
+        Row: {
+          content: string
+          created_at: string
+          driver_id: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          driver_id: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          driver_id?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "driver_notes_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       drivers: {
         Row: {
           created_at: string
