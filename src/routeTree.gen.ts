@@ -13,10 +13,10 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedTripsRouteImport } from './routes/_authenticated/trips'
-import { Route as AuthenticatedDriversRouteImport } from './routes/_authenticated/drivers'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAttendanceRouteImport } from './routes/_authenticated/attendance'
 import { Route as AuthenticatedAdvancesRouteImport } from './routes/_authenticated/advances'
+import { Route as AuthenticatedDriversIndexRouteImport } from './routes/_authenticated/drivers.index'
 import { Route as AuthenticatedDriversDriverIdRouteImport } from './routes/_authenticated/drivers.$driverId'
 
 const AuthRoute = AuthRouteImport.update({
@@ -38,11 +38,6 @@ const AuthenticatedTripsRoute = AuthenticatedTripsRouteImport.update({
   path: '/trips',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedDriversRoute = AuthenticatedDriversRouteImport.update({
-  id: '/drivers',
-  path: '/drivers',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -58,11 +53,17 @@ const AuthenticatedAdvancesRoute = AuthenticatedAdvancesRouteImport.update({
   path: '/advances',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDriversIndexRoute =
+  AuthenticatedDriversIndexRouteImport.update({
+    id: '/drivers/',
+    path: '/drivers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDriversDriverIdRoute =
   AuthenticatedDriversDriverIdRouteImport.update({
-    id: '/$driverId',
-    path: '/$driverId',
-    getParentRoute: () => AuthenticatedDriversRoute,
+    id: '/drivers/$driverId',
+    path: '/drivers/$driverId',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -71,9 +72,9 @@ export interface FileRoutesByFullPath {
   '/advances': typeof AuthenticatedAdvancesRoute
   '/attendance': typeof AuthenticatedAttendanceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
-  '/drivers': typeof AuthenticatedDriversRouteWithChildren
   '/trips': typeof AuthenticatedTripsRoute
   '/drivers/$driverId': typeof AuthenticatedDriversDriverIdRoute
+  '/drivers/': typeof AuthenticatedDriversIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -81,9 +82,9 @@ export interface FileRoutesByTo {
   '/advances': typeof AuthenticatedAdvancesRoute
   '/attendance': typeof AuthenticatedAttendanceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
-  '/drivers': typeof AuthenticatedDriversRouteWithChildren
   '/trips': typeof AuthenticatedTripsRoute
   '/drivers/$driverId': typeof AuthenticatedDriversDriverIdRoute
+  '/drivers': typeof AuthenticatedDriversIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,9 +94,9 @@ export interface FileRoutesById {
   '/_authenticated/advances': typeof AuthenticatedAdvancesRoute
   '/_authenticated/attendance': typeof AuthenticatedAttendanceRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
-  '/_authenticated/drivers': typeof AuthenticatedDriversRouteWithChildren
   '/_authenticated/trips': typeof AuthenticatedTripsRoute
   '/_authenticated/drivers/$driverId': typeof AuthenticatedDriversDriverIdRoute
+  '/_authenticated/drivers/': typeof AuthenticatedDriversIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,9 +106,9 @@ export interface FileRouteTypes {
     | '/advances'
     | '/attendance'
     | '/dashboard'
-    | '/drivers'
     | '/trips'
     | '/drivers/$driverId'
+    | '/drivers/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,9 +116,9 @@ export interface FileRouteTypes {
     | '/advances'
     | '/attendance'
     | '/dashboard'
-    | '/drivers'
     | '/trips'
     | '/drivers/$driverId'
+    | '/drivers'
   id:
     | '__root__'
     | '/'
@@ -126,9 +127,9 @@ export interface FileRouteTypes {
     | '/_authenticated/advances'
     | '/_authenticated/attendance'
     | '/_authenticated/dashboard'
-    | '/_authenticated/drivers'
     | '/_authenticated/trips'
     | '/_authenticated/drivers/$driverId'
+    | '/_authenticated/drivers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -167,13 +168,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTripsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/drivers': {
-      id: '/_authenticated/drivers'
-      path: '/drivers'
-      fullPath: '/drivers'
-      preLoaderRoute: typeof AuthenticatedDriversRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -195,41 +189,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdvancesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/drivers/': {
+      id: '/_authenticated/drivers/'
+      path: '/drivers'
+      fullPath: '/drivers/'
+      preLoaderRoute: typeof AuthenticatedDriversIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/drivers/$driverId': {
       id: '/_authenticated/drivers/$driverId'
-      path: '/$driverId'
+      path: '/drivers/$driverId'
       fullPath: '/drivers/$driverId'
       preLoaderRoute: typeof AuthenticatedDriversDriverIdRouteImport
-      parentRoute: typeof AuthenticatedDriversRoute
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
-
-interface AuthenticatedDriversRouteChildren {
-  AuthenticatedDriversDriverIdRoute: typeof AuthenticatedDriversDriverIdRoute
-}
-
-const AuthenticatedDriversRouteChildren: AuthenticatedDriversRouteChildren = {
-  AuthenticatedDriversDriverIdRoute: AuthenticatedDriversDriverIdRoute,
-}
-
-const AuthenticatedDriversRouteWithChildren =
-  AuthenticatedDriversRoute._addFileChildren(AuthenticatedDriversRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdvancesRoute: typeof AuthenticatedAdvancesRoute
   AuthenticatedAttendanceRoute: typeof AuthenticatedAttendanceRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedDriversRoute: typeof AuthenticatedDriversRouteWithChildren
   AuthenticatedTripsRoute: typeof AuthenticatedTripsRoute
+  AuthenticatedDriversDriverIdRoute: typeof AuthenticatedDriversDriverIdRoute
+  AuthenticatedDriversIndexRoute: typeof AuthenticatedDriversIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdvancesRoute: AuthenticatedAdvancesRoute,
   AuthenticatedAttendanceRoute: AuthenticatedAttendanceRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedDriversRoute: AuthenticatedDriversRouteWithChildren,
   AuthenticatedTripsRoute: AuthenticatedTripsRoute,
+  AuthenticatedDriversDriverIdRoute: AuthenticatedDriversDriverIdRoute,
+  AuthenticatedDriversIndexRoute: AuthenticatedDriversIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -243,13 +235,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
