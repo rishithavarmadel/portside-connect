@@ -14,7 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      advances: {
+        Row: {
+          amount: number
+          created_at: string
+          date: string
+          driver_id: string
+          id: string
+          reason: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          date?: string
+          driver_id: string
+          id?: string
+          reason?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          date?: string
+          driver_id?: string
+          id?: string
+          reason?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "advances_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attendance: {
+        Row: {
+          created_at: string
+          date: string
+          driver_id: string
+          id: string
+          status: Database["public"]["Enums"]["attendance_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date?: string
+          driver_id: string
+          id?: string
+          status: Database["public"]["Enums"]["attendance_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          driver_id?: string
+          id?: string
+          status?: Database["public"]["Enums"]["attendance_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      drivers: {
+        Row: {
+          created_at: string
+          date_joined: string
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string
+          status: Database["public"]["Enums"]["driver_status"]
+          updated_at: string
+          vehicle_number: string
+        }
+        Insert: {
+          created_at?: string
+          date_joined?: string
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone: string
+          status?: Database["public"]["Enums"]["driver_status"]
+          updated_at?: string
+          vehicle_number: string
+        }
+        Update: {
+          created_at?: string
+          date_joined?: string
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string
+          status?: Database["public"]["Enums"]["driver_status"]
+          updated_at?: string
+          vehicle_number?: string
+        }
+        Relationships: []
+      }
+      trips: {
+        Row: {
+          created_at: string
+          date: string
+          driver_id: string
+          id: string
+          notes: string | null
+          trip_count: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date?: string
+          driver_id: string
+          id?: string
+          notes?: string | null
+          trip_count?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          driver_id?: string
+          id?: string
+          notes?: string | null
+          trip_count?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trips_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +169,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      attendance_status: "present" | "absent"
+      driver_status: "active" | "inactive"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +297,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      attendance_status: ["present", "absent"],
+      driver_status: ["active", "inactive"],
+    },
   },
 } as const
