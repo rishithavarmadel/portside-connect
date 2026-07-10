@@ -243,11 +243,13 @@ function DriverInfoPage() {
             <span className="text-xs text-muted-foreground">{notes.length} total</span>
           </div>
           <Textarea
+            ref={noteInputRef}
             rows={4}
             placeholder="Write anything about this driver…"
             value={newNote}
             onChange={(e) => setNewNote(e.target.value)}
           />
+
           <Button
             className="w-full h-11"
             disabled={!newNote.trim() || addNote.isPending}
