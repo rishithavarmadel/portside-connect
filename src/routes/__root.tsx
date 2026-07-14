@@ -86,10 +86,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Hanuman Transport Admin" },
       {
         property: "og:description",
-        content: "Drivers, attendance, trips and advances — all in one place.",
+        content: "Manage drivers, attendance, trips and daily advances for a family-owned transport business at Gangavaram Port.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Hanuman Transport Admin" },
+      { name: "twitter:description", content: "Manage drivers, attendance, trips and daily advances for a family-owned transport business at Gangavaram Port." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/04b26978-55c0-42dc-8386-bb41bc2bf02d/id-preview-62517802--ee7e9d2e-ee0b-4537-9a3f-f49e2c2c6777.lovable.app-1783737835296.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/04b26978-55c0-42dc-8386-bb41bc2bf02d/id-preview-62517802--ee7e9d2e-ee0b-4537-9a3f-f49e2c2c6777.lovable.app-1783737835296.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
