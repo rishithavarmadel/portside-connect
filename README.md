@@ -1,20 +1,20 @@
 # Portside Connect
 
-Portside Connect is a web application I created to help keep track of my father's business.
+Portside Connect is a web application I built to help track and manage my father's business in one place.
 
-## About
+## About the Project
 
-The idea came from a real problem I noticed in my father's business. I wanted to build something that could make it easier to keep track of business-related information in one place instead of managing everything in his whatsapp.
+I got the idea from seeing how my father's business is managed in day-to-day life. I wanted to turn a real-world problem into something useful by creating a simple web application that makes tracking business information easier and more organized.
 
-I'm still learning and improving the project, but this gave me a chance to work on a real-world problem and learn how a web application is built.
+This project also gave me an opportunity to learn more about building a real web application and working with technologies like React, TypeScript, and Supabase.
 
-## Built With
+## Technologies Used
 
-- TypeScript
 - React
+- TypeScript
 - Supabase
 - Vite
 
 ## Current Status
 
-The project is still being worked on and improved.
+This project is still a work in progress, and I'm continuing to learn, improve it, and add new features.
